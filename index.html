@@ -687,7 +687,7 @@ html[data-theme="dark"]{--c1:#ff669d;--c2:#7fc8f8;--c3:#ffab40;--c4:#00c853;--c5
 .dleg li{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13.5px;color:var(--fg)}
 .dleg li.z{opacity:.45}
 .dleg i{width:14px;height:14px;border-radius:4px}
-.dleg .dn{overflow-wrap:anywhere;line-height:1.3}.dleg .dab{font-weight:700;color:var(--muted)}
+.dleg .dn{overflow-wrap:anywhere;line-height:1.3}.dleg .dab{font-weight:400;color:var(--muted);font-size:.86em;opacity:.8}
 .dleg .dv{font-weight:800;font-variant-numeric:tabular-nums}.dleg .dv small{font-weight:500;color:var(--muted)}
 .donut:has(.dsl[data-i="0"]:hover) li[data-i="0"],.donut:has(li[data-i="0"]:hover) li[data-i="0"]{background:color-mix(in srgb,var(--accent) 14%,transparent);font-weight:800;transform:scale(1.03)}
 .donut:has(li[data-i="0"]:hover) .dsl[data-i="0"]{transform:scale(1.05)}
@@ -888,7 +888,7 @@ body.on-dash .wrap,body.on-dash .masthead .in{max-width:1180px}
 const TOOL={MJL:["My Jump Lab","mjl"],CC:["Célula de carga","cc"],MAN:["Manual","" ],CUE:["Cuestionario","cue"]};
 const AREAS={salto:"Saltos y rebote",hop:"Saltos unipodales horizontales",vel:"Velocidad y cambio de dirección",fuerza:"Fuerza isométrica",mov:"Movilidad, capacidad y control",ms:"Extremidad superior funcional",core:"Core",prom:"Dolor y cuestionarios"};
 const T={
-cmj:{n:"CMJ (manos en cintura)",a:"salto",h:"MJL",u:"cm",hb:true,
+cmj:{n:"CMJ",a:"salto",h:"MJL",u:"cm",hb:true,
  obj:"Rendimiento de salto vertical con contramovimiento. Sirve para seguir el estado neuromuscular y la respuesta al entrenamiento.",
  how:"Superficie firme, cámara lateral fija con los pies visibles, manos en la cintura. Desde quieto, descenso autoelegido y salto máximo inmediato; aterrizar controlado sin recoger rodillas. 3 intentos, 45–90 s de pausa.",
  out:"Altura (cm) y tiempo de vuelo; según modo, tiempo hasta despegue, RSI-mod y estimaciones de fuerza, velocidad y potencia.",
@@ -1607,7 +1607,7 @@ async function del(kind,id){
 function sortData(){(S.agenda||[]).sort((a,b)=>((a.date||"")+(a.time||"")).localeCompare((b.date||"")+(b.time||"")));S.patients.sort((a,b)=>pName(a).localeCompare(pName(b),"es"));S.evals.sort((a,b)=>(a.date||"").localeCompare(b.date||"")||(a.created||0)-(b.created||0))}
 /* Compatibilidad: evaluaciones de la versión anterior (results por test) pasan a filas */
 function normEval(e){
-  if(Array.isArray(e.rows))return e;
+  if(Array.isArray(e.rows)){if(e.rows.some(r=>r.test==="CMJ (manos en cintura)"))e={...e,rows:e.rows.map(r=>r.test==="CMJ (manos en cintura)"?{...r,test:"CMJ"}:r)};return e}
   const rows=[];Object.entries(e.results||{}).forEach(([tid,r])=>{const t=T[tid];const u=t?t.u:"";const m="Resultado";
     if(r.v!=null&&r.v!=="")rows.push({tid,test:t?t.n:tid,metric:m,side:"",value:r.v,unit:u,note:r.note||""});
     if(r.r!=null&&r.r!=="")rows.push({tid,test:t?t.n:tid,metric:m,side:"D",value:r.r,unit:u,note:r.note||""});
@@ -1847,7 +1847,7 @@ ${sec}
    IMPORTADOR DE CSV DE MY JUMP LAB (varios pacientes a la vez)
    ===================================================================== */
 const MJL_EVAL="Saltos My Jump Lab";
-const MJL_TYPES={cmj:["cmj","CMJ (manos en cintura)"],sj:["sj","Squat jump"],cmjfree:["cmj_arms","CMJ con brazos (Abalakov)"],dj:["dj_rsi","Drop jump · RSI"]};
+const MJL_TYPES={cmj:["cmj","CMJ"],sj:["sj","Squat jump"],cmjfree:["cmj_arms","CMJ con brazos (Abalakov)"],dj:["dj_rsi","Drop jump · RSI"]};
 function mjlNum(s){s=String(s??"").trim();if(!s||s==="---"||/∞|inf|nan/i.test(s))return null;
   if(s.includes(",")&&s.includes("."))s=s.replace(/\./g,"").replace(",",".");else s=s.replace(",",".");const n=Number(s);return isFinite(n)?n:null}
 const mjlFmt=x=>String(Math.round(x*100)/100);
@@ -2403,7 +2403,7 @@ function donut(items){const tot=items.reduce((a,x)=>a+x.v,0);if(!tot)return"";
     const txt=f>=0.05?`<text x="${lx.toFixed(1)}" y="${(ly+5).toFixed(1)}" class="dpl" style="fill:${String(x.c).replace("--c","--t")}${f<0.1?";font-size:11px":""}">${esc(x.a)}</text>`:"";
     return`<path d="${d}" fill="${x.c}" class="dsl" data-i="${di}"><title>${esc(x.n)}: ${x.v} (${Math.round(f*100)}%)</title></path>${txt}`}).join("");
   return`<div class="donut"><svg viewBox="0 0 200 200" role="img" aria-label="${esc(live.map(x=>x.n+" "+x.v).join(", "))}">${arcs}</svg>
-   <ul class="dleg">${items.map((x,i)=>`<li class="${x.v?"":"z"}" data-i="${i}"><i style="background:${x.c}"></i><span class="dn">${esc(x.n)} <b class="dab">(${esc(x.a)})</b></span><span class="dv">${Math.round(x.v/tot*100)}%<small> (${x.v})</small></span></li>`).join("")}</ul></div>`}
+   <ul class="dleg">${items.map((x,i)=>`<li class="${x.v?"":"z"}" data-i="${i}"><i style="background:${x.c}"></i><span class="dn">${esc(x.n)}${String(x.n).trim().toLowerCase()===String(x.a).trim().toLowerCase()?"":` <span class="dab">(${esc(x.a)})</span>`}</span><span class="dv">${Math.round(x.v/tot*100)}%<small> (${x.v})</small></span></li>`).join("")}</ul></div>`}
 function vDash(){
   if(S.allEv)return vAllEvals();
   if(S.topView)return vTopTests();
