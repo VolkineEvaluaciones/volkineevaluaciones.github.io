@@ -95,7 +95,7 @@ function loginScreen(){
 function nameScreen(user){return new Promise(done=>{
   let el=document.getElementById("vkLogin");if(!el){el=document.createElement("div");el.id="vkLogin";document.body.appendChild(el)}
   el.innerHTML=`<form class="box"><h1>¿Cómo te llamas?</h1><p>Este nombre aparecerá en las evaluaciones que registres.</p>
-    <label for="vkN">Nombre y apellido</label><input id="vkN" required placeholder="Ej.: Magdalena Fingston"><button type="submit">Guardar</button><div class="err" id="vkErr"></div></form>`;
+    <label for="vkN">Nombre y apellido</label><input id="vkN" required placeholder="Ej.: Magdalena Pfingsthorn"><button type="submit">Guardar</button><div class="err" id="vkErr"></div></form>`;
   const f=el.querySelector("form");f.vkN.focus();
   f.onsubmit=async ev=>{ev.preventDefault();const n=f.vkN.value.trim().replace(/\s+/g," ");if(!n)return;
     try{await A.updateProfile(user,{displayName:n});done(n)}catch(e){el.querySelector("#vkErr").textContent="No se pudo guardar ("+(e.code||e.message)+")."}};
@@ -126,6 +126,7 @@ A.onAuthStateChanged(auth,async user=>{
   if(!user){if(started){location.reload();return}loginScreen();return}
   if(started)return;started=true;
   let name=user.displayName;
+  if(name==="Magdalena "+"Fingston"){name="Magdalena Pfingsthorn";try{await A.updateProfile(user,{displayName:name})}catch(e){}}
   if(!name)name=await nameScreen(user);
   document.getElementById("vkLogin")?.remove();
   userMenu(user,name);
@@ -1572,7 +1573,7 @@ function mergeEvalDoc(old,add){const zona=old.zona||add.zona||"";const files=[..
 const tipoName=k=>(TIPO(k)||[0,"Sin clasificar"])[1];
 const S={agenda:[],aform:null,cal:null,calSel:null,pclub:"",clubOther:false,toast:"",leaveArm:null,tpick:null,aiMsg:"",nbm:false,allEv:false,tcat:null,bcat:null,tov:{},tedit:null,stOpen:null,lg:null,ls:null,bats:{},bedit:null,evoOpen:null,ren:null,pq:"",info:{},view:"inicio",dash:{period:"all",sport:"",tipo:"",year:new Date().getFullYear(),fab:false},pid:null,eid:null,form:null,pform:null,folder:null,test:null,q:"",patients:[],evals:[],loading:true,warn:"",confirm:null,busy:null,msg:"",msgErr:false,rep:null};
 let db=null,base=null,mem=false,sampleFn=null,canImg=false,assets=null,downloads=null;
-const IS_WEB=!!window.__VOLKINE_WEB;let ME=null;
+const IS_WEB=!!window.__VOLKINE_WEB;let ME=null,fixedNames=false;
 const byName=e=>e&&e.by&&e.by.name?e.by.name:"";
 const uidgen=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const pName=p=>(p&&(p.name||p.code))||"Paciente";
@@ -1628,7 +1629,7 @@ async function exportBackup(){
   setMsg("Preparando respaldo…");
   const out={app:"volkine-evaluacion",version:1,at:new Date().toISOString(),patients:{},evals:{},agenda:{},baterias:{},tests:{}};
   for(const p of S.patients){const c=strip(p);if(c.files)c.files=await inlineFiles(c.files);out.patients[p.id]=c}
-  for(const e of S.evals){const c=strip(e);if(c.files)c.files=await inlineFiles(c.files);if(!IS_WEB&&!(c.by&&c.by.name))c.by={name:"Magdalena Fingston"};out.evals[e.id]=c}
+  for(const e of S.evals){const c=strip(e);if(c.files)c.files=await inlineFiles(c.files);if(!IS_WEB&&!(c.by&&c.by.name))c.by={name:"Magdalena Pfingsthorn"};out.evals[e.id]=c}
   for(const a of S.agenda||[])out.agenda[a.id]=strip(a);
   for(const [k,b] of Object.entries(S.bats||{}))out.baterias[k]=strip(b);
   for(const [k,t] of Object.entries(S.tov||{})){const c=JSON.parse(JSON.stringify(t));if(c.img&&c.img.url){const d=await inlineUrl(c.img.url);if(d)c.img={url:d};else delete c.img}out.tests[k]=c}
@@ -1673,7 +1674,7 @@ async function boot(){
     col("b").onSnapshot(s=>{S.bats=Object.fromEntries(s.docs.map(x=>[x.id,{...x.data(),id:x.id}]));rebuildBats();if(!S.form&&!S.pform&&!S.rep&&!S.bedit)render()},()=>{});
     col("a").onSnapshot(s=>{S.agenda=s.docs.map(x=>({...x.data(),id:x.id}));sortData();if(!S.form&&!S.pform&&!S.rep&&!S.aform)render()},()=>{});
     col("p").onSnapshot(s=>{S.patients=s.docs.map(x=>({...x.data(),id:x.id}));sortData();done("p",s);if(!S.form&&!S.pform&&!S.rep)render()},fail);
-    col("e").onSnapshot(s=>{S.evals=s.docs.map(x=>normEval({...x.data(),id:x.id}));sortData();done("e",s);if(!S.form&&!S.pform&&!S.rep)render()},fail);
+    col("e").onSnapshot(s=>{if(!S.readOnly&&!fixedNames){fixedNames=true;s.docs.forEach(x=>{const d=x.data();if(d&&d.by&&d.by.name==="Magdalena "+"Fingston")col("e").doc(x.id).set({...d,by:{...d.by,name:"Magdalena Pfingsthorn"}}).catch(()=>{})})}S.evals=s.docs.map(x=>normEval({...x.data(),id:x.id}));sortData();done("e",s);if(!S.form&&!S.pform&&!S.rep)render()},fail);
   }catch(e){memMode("No se pudo conectar el almacenamiento. Los datos no se guardarán.")}
 }
 
