@@ -973,6 +973,11 @@ side_hop:{n:"Side hop 30 s",a:"hop",h:"MAN",u:"rep",hb:true,
  how:"Saltar de lado a lado entre dos líneas separadas 40 cm durante 30 s; contar saltos válidos.",
  out:"Repeticiones por pierna y LSI.",
  interp:"Sensible a deficiencias de tobillo y rodilla en tareas frontales.",err:"Contar saltos que pisan la línea.",prec:"Fase avanzada."},
+hop_f8:{n:"Figure-of-8 hop",a:"hop",h:"MAN",u:"s",hb:false,
+ obj:"Agilidad unipodal con cambios de dirección en curva.",
+ how:"Dos conos a 5 m. Saltar en un pie lo más rápido posible dando 2 vueltas en forma de 8. Falla si apoya el otro pie o pierde el recorrido. 2 intentos válidos por pierna; registrar el mejor tiempo.",
+ out:"Tiempo (s) por pierna y LSI (pierna sana / lesionada × 100, porque menos tiempo es mejor).",
+ interp:"Junto con el side hop, de los tests funcionales más relevantes tras esguince e inestabilidad de tobillo. Forma parte del Ankle-GO.",err:"Cambiar la distancia entre conos o el sentido de giro entre sesiones.",prec:"Fase avanzada."},
 sprint10:{n:"Sprint 10 m",a:"vel",h:"MJL",u:"s",hb:false,
  obj:"Capacidad de aceleración inicial.",
  how:"Pista plana, distancias medidas, trípode encuadrando las marcas. Misma salida y misma definición de inicio. 2–3 sprints con pausa completa.",
@@ -1072,6 +1077,9 @@ askling:{n:"Askling H-test",a:"mov",h:"MAN",u:"0–10",hb:false,
 ybal_lq:{n:"Y-Balance tren inferior",a:"mov",h:"MAN",u:"%",hb:true,
  obj:"Control dinámico en apoyo unipodal.",how:"Alcances anterior, posteromedial y posterolateral; compuesto = suma / (3 × longitud de pierna) × 100.",
  out:"Alcances (cm), compuesto (%) y diferencia anterior entre lados.",interp:"Tras esguince y LCA muestra déficits de control.",err:"Apoyar el pie que alcanza.",prec:"—"},
+sls_err:{n:"Apoyo unipodal 20 s (errores)",a:"mov",h:"MAN",u:"errores",hb:false,
+ obj:"Control postural estático en un pie.",how:"Descalzo, superficie firme, manos en la cintura, ojos cerrados, 20 s por pierna. Contar errores: apoyar el otro pie, abrir los ojos, soltar las manos o mover el pie de apoyo.",
+ out:"Errores por pierna.",interp:"Más errores en el lado lesionado orienta a déficit sensoriomotor. Forma parte del Ankle-GO.",err:"Cambiar la superficie o permitir los ojos abiertos entre sesiones.",prec:"Proteger ante caídas."},
 heel_raise:{n:"Elevaciones de talón unipodales",a:"mov",h:"MAN",u:"rep",hb:true,
  obj:"Capacidad de la pantorrilla.",how:"Al borde de un escalón con metrónomo; rango completo hasta fatiga técnica.",
  out:"Repeticiones por lado y dolor.",interp:"Útil en tendinopatía aquiliana y esguince de tobillo.",err:"Perder altura en las últimas repeticiones.",prec:"—"},
@@ -1123,6 +1131,7 @@ kos:{n:"KOS-ADLS",a:"prom",h:"CUE",u:"%",hb:true,obj:"Actividades de la vida dia
 grs:{n:"Escala global de función",a:"prom",h:"CUE",u:"%",hb:true,obj:"Función percibida de la rodilla.",how:"0 a 100 respecto de antes de la lesión.",out:"%.",interp:"Delaware-Oslo: > 90.",err:"—",prec:"—"},
 koos_sp:{n:"KOOS deporte",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Subescala deporte y recreación de rodilla.",how:"KOOS.",out:"0–100.",interp:"—",err:"—",prec:"—"},
 iprrs:{n:"I-PRRS",a:"prom",h:"CUE",u:"/60",hb:true,obj:"Preparación psicológica para volver al deporte en cualquier lesión.",how:"6 ítems de confianza (0–100 cada uno); sumar y dividir por 10.",out:"0–60.",interp:"Alternativa al ACL-RSI cuando la lesión no es de LCA. Puntaje bajo con buen rendimiento físico: trabajar confianza antes de volver.",err:"—",prec:"—"},
+faam:{n:"FAAM deporte",a:"prom",h:"CUE",u:"%",hb:true,obj:"Función de tobillo y pie en actividades deportivas.",how:"Subescala deporte del Foot and Ankle Ability Measure (8 ítems).",out:"0–100%.",interp:"Puntajes bajos indican limitación en el deporte. Forma parte del Ankle-GO.",err:"—",prec:"—"},
 cait:{n:"CAIT",a:"prom",h:"CUE",u:"/30",hb:true,obj:"Inestabilidad crónica de tobillo.",how:"9 ítems.",out:"0–30.",interp:"Puntajes bajos indican más inestabilidad percibida.",err:"—",prec:"—"},
 visa_a:{n:"VISA-A",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Severidad de tendinopatía aquiliana.",how:"8 ítems.",out:"0–100.",interp:"Medida principal de seguimiento.",err:"—",prec:"—"},
 visa_p:{n:"VISA-P",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Severidad de tendinopatía rotuliana.",how:"8 ítems.",out:"0–100.",interp:"Medida principal de seguimiento.",err:"—",prec:"—"},
@@ -1332,6 +1341,8 @@ squeeze5:{nint:"1 intento de 5 s",inst:"“Aprieta mi puño entre las rodillas c
 decline_nrs:{nint:"1 sentadilla por pierna",inst:"“Baja en una pierna sobre la tabla inclinada. ¿Cuánto dolor sentiste de 0 a 10?”"},
 hop_nrs:{nint:"10 saltos por pierna",inst:"“Salta 10 veces en un pie. ¿Cuánto dolor sentiste de 0 a 10?”"},
 plank:{nint:"1 intento",inst:"“Codos bajo los hombros y el cuerpo recto. Mantén todo lo que puedas sin que se hunda la cadera.”"},
+hop_f8:{nint:"1 práctica + 2 válidos por pierna",inst:"“En un pie, salta alrededor de los conos haciendo un 8, dos vueltas, lo más rápido que puedas. No apoyes el otro pie.”"},
+sls_err:{nint:"1 intento de 20 s por pierna",inst:"“Párate en un pie, manos en la cintura y ojos cerrados. Quédate lo más quieto posible durante 20 segundos.”"},
 knee_rom:{nint:"2 mediciones por lado",inst:"“Acostado de espalda, dobla la rodilla todo lo que puedas; ahora estírala al máximo.”"}
 };
 Object.entries(TX).forEach(([k,o])=>{if(T[k])Object.assign(T[k],o)});
@@ -1385,13 +1396,13 @@ const LES=[
  fases:[
   {w:"P",n:"Dolor",t:["pain"],o:"Dolor durante la práctica deportiva y en las últimas 24 h."},
   {w:"A",n:"Deficiencias del tobillo",t:["ankle_df","pf_iso","ev_iso","heel_raise"],o:"Rango de movimiento, fuerza, resistencia y potencia."},
-  {w:"A",n:"Percepción del deportista",t:["cait"],o:"Confianza, sensación de estabilidad y preparación psicológica."},
-  {w:"S",n:"Control sensoriomotor",t:["ybal_lq"],o:"Equilibrio dinámico y propiocepción."},
-  {w:"S",n:"Rendimiento deportivo",t:["side_hop","hop_single","hop_6m","rsi105","t505"],o:"Saltos, agilidad, ejercicios específicos y una sesión completa de entrenamiento."}],
+  {w:"A",n:"Percepción del deportista",t:["cait","faam","iprrs"],o:"Confianza, sensación de estabilidad y preparación psicológica."},
+  {w:"S",n:"Control sensoriomotor",t:["sls_err","ybal_lq"],o:"Equilibrio dinámico y propiocepción."},
+  {w:"S",n:"Rendimiento deportivo",t:["side_hop","hop_f8","hop_single","hop_6m","rsi105","t505"],o:"Saltos, agilidad, ejercicios específicos y una sesión completa de entrenamiento."}],
  crit:"PAASS (155 expertos, Delphi): dolor, deficiencias del tobillo, percepción del deportista, control sensoriomotor y rendimiento. Hay consenso en qué evaluar, no en puntos de corte.",
  interp:["Una dorsiflexión limitada en carga es frecuente tras esguince y afecta aterrizajes y cambios de dirección.","El CAIT ayuda a detectar inestabilidad crónica temprano."],
  prec:["Descartar fractura (reglas de Ottawa) y lesión de sindesmosis antes de pruebas de impacto."],
- refs:[["Smith et al. 2021, BJSM (PAASS)","https://pubmed.ncbi.nlm.nih.gov/34158354/"]]},
+ refs:[["Smith et al. 2021, BJSM (PAASS)","https://pubmed.ncbi.nlm.nih.gov/34158354/"],["Picot et al. 2023, Ankle-GO","https://pmc.ncbi.nlm.nih.gov/articles/PMC10732116/"]]},
 {id:"isquios",grp:"Lesiones musculares",sub:"Isquiotibiales",n:"Desgarro de isquiotibiales",s:"Desgarro muscular",
  intro:"La lesión más frecuente en el fútbol y con alta recaída. Los clínicos de fútbol profesional avanzan por tres hitos: correr a alta velocidad, volver al entrenamiento y volver al rendimiento.",
  fases:[
@@ -1495,9 +1506,13 @@ const GEN=[
 {id:"movilidad",n:"Movilidad y postura",s:"Rangos articulares y resistencia de tronco",ic:"giro",
  intro:"Rangos de movimiento de tobillo, cadera y hombro junto con la resistencia de tronco, para personas con molestias posturales o vida sedentaria.",
  t:["ankle_df","hip_ir","slr","rom_er","rom_ir","mcgill_flex","sorensen","side_bridge","pain"]},
-{id:"z_tobillo",zona:true,g:"gen",les:[],n:"Tobillo",s:"Movilidad, fuerza, reactividad y control del tobillo y pie",ic:"pulso",
- intro:"Evaluación completa del tobillo sin una lesión específica: dorsiflexión, fuerza de flexores plantares y eversores, capacidad reactiva, saltos unipodales y equilibrio. Útil como línea base, control preventivo o ante molestias inespecíficas.",
- t:["ankle_df","heel_raise","pf_iso","ev_iso","balance","ybal_lq","side_hop","hop_single","cmj_uni","dj_uni","rsi105","cait","pain"]},
+{id:"z_tobillo",zona:true,g:"gen",les:[],n:"Tobillo",s:"Reintegro de tobillo para cualquier lesión: dolor, movilidad, fuerza, control, saltos y agilidad",ic:"pulso",
+ intro:"Batería de tobillo para cualquier lesión (esguince lateral, inestabilidad crónica, sindesmosis, fractura consolidada o tendinopatía) y también como línea base. Sigue los 5 dominios del consenso PAASS. Orden de toma: cuestionarios → dorsiflexión → fuerza con célula de carga y elevaciones de talón → apoyo unipodal e Y-Balance → CMJ y drop jump unipodal (My Jump Lab) → side hop, figure-of-8 y single hop → 505 en fase final. Unos 60 min. Por etapa: (1) sin impacto: cuestionarios, dorsiflexión, fuerza y equilibrio; (2) antes de correr y saltar: + CMJ unipodal; (3) antes de entrenar con el equipo: + drop jump y hops; (4) antes de competir: todo, incluido 505.",
+ t:["faam","cait","iprrs","pain","ankle_df","pf_iso","ev_iso","heel_raise","sls_err","ybal_lq","cmj_uni","dj_uni","side_hop","hop_f8","hop_single","t505"],
+ crit:"PAASS: dolor, deficiencias del tobillo, percepción del deportista, control sensoriomotor y rendimiento deportivo. Hay consenso en qué evaluar, no en puntos de corte. Criterios orientativos: dolor sin aumento a las 24 h; dorsiflexión con diferencia < 2 cm; LSI ≥ 90% en fuerza, elevaciones de talón, saltos y hops; Y-Balance anterior con diferencia < 4 cm. El Ankle-GO (FAAM, I-PRRS/ALR-RSI, apoyo unipodal, SEBT, side hop y figure-of-8) predice recidiva: un puntaje bajo a los 2 meses se asoció a un riesgo 9 veces mayor.",
+ interp:["Una dorsiflexión limitada en carga es frecuente tras esguince y afecta aterrizajes y cambios de dirección.","El side hop y el figure-of-8 suelen mostrar el déficit que el apoyo unipodal no muestra.","El CAIT ayuda a detectar inestabilidad crónica temprano; FAAM y I-PRRS bajos con buen rendimiento físico indican trabajar confianza.","En el informe, informa cuántos criterios cumple en vez de un apto/no apto por un solo test."],
+ prec:["Descartar fractura (reglas de Ottawa) y lesión de sindesmosis antes de pruebas de impacto.","Hops y drop jump sólo con autorización para impacto unilateral.","Ningún test aislado define el alta."],
+ refs:[["Smith et al. 2021, BJSM (PAASS)","https://pubmed.ncbi.nlm.nih.gov/34158354/"],["Picot et al. 2023, Ankle-GO","https://pmc.ncbi.nlm.nih.gov/articles/PMC10732116/"],["Picot et al. 2024, Ankle-GO y recidiva","https://pmc.ncbi.nlm.nih.gov/articles/PMC10920508"]]},
 {id:"z_rodilla",zona:true,g:"gen",les:[],n:"Rodilla",s:"Reintegro de rodilla para cualquier lesión: estado clínico, fuerza, saltos, hops y confianza",ic:"pulso",
  intro:"Batería de rodilla para cualquier lesión (LCA, menisco, colaterales, cartílago o rotuliana) y también como línea base. Orden de toma: cuestionarios → ROM y derrame → fuerza isométrica con célula de carga → CMJ y drop jump unipodal (My Jump Lab) → hop tests → calidad de aterrizaje en video → sprint y 505 en fase final. Unos 60–75 min. Elige los tests según la etapa: (1) sin impacto: cuestionarios, ROM y fuerza; (2) antes de correr y saltar: + CMJ bilateral y unipodal; (3) antes de entrenar con el equipo: + drop jump, hops y aterrizaje; (4) antes de competir: todo, incluido sprint y 505.",
  t:["ikdc","koos_sp","acl_rsi","iprrs","pain","knee_rom","q_iso","h_iso","cmj","cmj_uni","dj_uni","hop_single","hop_triple","hop_cross","hop_6m","less","valgus","sprint10","t505"],
@@ -2402,7 +2417,7 @@ function vAllEvals(){
   </section>`}
 /* Gráfico de torta: abreviatura dentro de cada porción; nombre, % y n.º en la leyenda */
 const DCOL=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
-const ABBR={cmj:"CMJ",cmj_arms:"CMJb",sj:"SJ",dj_rsi:"DJ",cmj_uni:"CMJu",dj_uni:"DJu",rsimod:"RSIm",rsi105:"RSI",fv_jump:"FV",hjump:"SH",ankle_df:"DF",plank:"PF",side_bridge:"PL",sorensen:"BS",mcgill_flex:"FT",q_iso:"CUA",h_iso:"ISQ",add_iso:"ADD",abd_iso:"ABD",pf_iso:"FPL",ev_iso:"EV",hip_ir:"RIC",hip_flex:"FC",slr:"EPR",hop_single:"SHop",hop_triple:"THop",hop_cross:"CHop",hop_6m:"6mH",side_hop:"LHop",slbridge:"PU",heel_raise:"ET",ybal_lq:"YBT",uqybt:"YBTs",grip:"PM",pushup:"FLX",ckcuest:"CKC",sasp:"SASP",sprint10:"S10",sprint30:"S30",t505:"505",illinois:"ILL",smas:"SMAS",nordic_ba:"NOR",nordic_tq:"NORt",vbt_mcv:"VBT",pain:"DOL",er0:"RE0",ir0:"RI0",er90:"RE90",ir90:"RI90",scap:"ESC",rom_er:"ROMe",rom_ir:"ROMi",sh_flex:"FH",wellness:"WEL",valgus:"VAL",balance:"EQ",knee_rom:"ROMr",iprrs:"PRRS"};
+const ABBR={cmj:"CMJ",cmj_arms:"CMJb",sj:"SJ",dj_rsi:"DJ",cmj_uni:"CMJu",dj_uni:"DJu",rsimod:"RSIm",rsi105:"RSI",fv_jump:"FV",hjump:"SH",ankle_df:"DF",plank:"PF",side_bridge:"PL",sorensen:"BS",mcgill_flex:"FT",q_iso:"CUA",h_iso:"ISQ",add_iso:"ADD",abd_iso:"ABD",pf_iso:"FPL",ev_iso:"EV",hip_ir:"RIC",hip_flex:"FC",slr:"EPR",hop_single:"SHop",hop_triple:"THop",hop_cross:"CHop",hop_6m:"6mH",side_hop:"LHop",slbridge:"PU",heel_raise:"ET",ybal_lq:"YBT",uqybt:"YBTs",grip:"PM",pushup:"FLX",ckcuest:"CKC",sasp:"SASP",sprint10:"S10",sprint30:"S30",t505:"505",illinois:"ILL",smas:"SMAS",nordic_ba:"NOR",nordic_tq:"NORt",vbt_mcv:"VBT",pain:"DOL",er0:"RE0",ir0:"RI0",er90:"RE90",ir90:"RI90",scap:"ESC",rom_er:"ROMe",rom_ir:"ROMi",sh_flex:"FH",wellness:"WEL",valgus:"VAL",balance:"EQ",knee_rom:"ROMr",iprrs:"PRRS",hop_f8:"F8",faam:"FAAM",sls_err:"SLS"};
 const abbrOf=(tid,name)=>ABBR[tid]||(String(name||"").trim().split(/\s+/).length===1?String(name).slice(0,3).toUpperCase():"")||String(name||"?").split(/[\s\-·]+/).filter(w=>w.length>2||/^\d/.test(w)).map(w=>w[0].toUpperCase()).join("").slice(0,4)||"?";
 function donut(items){const tot=items.reduce((a,x)=>a+x.v,0);if(!tot)return"";
   const R=96,C=100;let a0=-Math.PI/2;const live=items.filter(x=>x.v);
