@@ -1057,6 +1057,9 @@ ankle_df:{n:"Dorsiflexión rodilla-pared",a:"mov",h:"MJL",u:"cm",hb:true,
  obj:"Rango de dorsiflexión en carga.",how:"Pie descalzo en línea, talón apoyado; avanzar la rodilla a la pared. 2–3 por lado. My ROM puede medir el ángulo tibial.",
  out:"Distancia (cm) o ángulo (°) por lado.",interp:"No traducir directo a acortamiento del sóleo. Limitada tras esguince.",
  err:"Levantar el talón, rodilla desviada, cámara no alineada.",prec:"—"},
+knee_rom:{n:"ROM de rodilla y derrame",a:"mov",h:"MAN",u:"°",hb:true,
+ obj:"Estado clínico de la rodilla antes de cargarla: derrame y rango de movimiento.",how:"Supino. Goniómetro (o My ROM) centrado en el cóndilo femoral: flexión activa y déficit de extensión por lado. Prueba de derrame (barrido / stroke test) graduada 0 a 3+.",
+ out:"Flexión (°), déficit de extensión (°) por lado y grado de derrame.",interp:"Requisito previo: sin derrame (0 o trazas) y extensión completa antes de saltos y hops.",err:"Cambiar el punto de referencia del goniómetro o la posición de cadera entre sesiones.",prec:"Con derrame o pérdida de extensión, no avanzar a impacto."},
 hip_ir:{n:"Rotación interna de cadera",a:"mov",h:"MJL",u:"°",hb:true,
  obj:"Amplitud de rotación interna femoral.",how:"Sedente 90/90 o prono, pelvis estabilizada; 2–3 repeticiones.",
  out:"Ángulo (°) por lado y dolor.",interp:"No identifica lesión intraarticular por sí solo.",err:"Rotar la pelvis.",prec:"—"},
@@ -1119,6 +1122,7 @@ ikdc:{n:"IKDC subjetivo",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Síntomas, funci
 kos:{n:"KOS-ADLS",a:"prom",h:"CUE",u:"%",hb:true,obj:"Actividades de la vida diaria de rodilla.",how:"14 ítems.",out:"%.",interp:"Delaware-Oslo: > 90.",err:"—",prec:"—"},
 grs:{n:"Escala global de función",a:"prom",h:"CUE",u:"%",hb:true,obj:"Función percibida de la rodilla.",how:"0 a 100 respecto de antes de la lesión.",out:"%.",interp:"Delaware-Oslo: > 90.",err:"—",prec:"—"},
 koos_sp:{n:"KOOS deporte",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Subescala deporte y recreación de rodilla.",how:"KOOS.",out:"0–100.",interp:"—",err:"—",prec:"—"},
+iprrs:{n:"I-PRRS",a:"prom",h:"CUE",u:"/60",hb:true,obj:"Preparación psicológica para volver al deporte en cualquier lesión.",how:"6 ítems de confianza (0–100 cada uno); sumar y dividir por 10.",out:"0–60.",interp:"Alternativa al ACL-RSI cuando la lesión no es de LCA. Puntaje bajo con buen rendimiento físico: trabajar confianza antes de volver.",err:"—",prec:"—"},
 cait:{n:"CAIT",a:"prom",h:"CUE",u:"/30",hb:true,obj:"Inestabilidad crónica de tobillo.",how:"9 ítems.",out:"0–30.",interp:"Puntajes bajos indican más inestabilidad percibida.",err:"—",prec:"—"},
 visa_a:{n:"VISA-A",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Severidad de tendinopatía aquiliana.",how:"8 ítems.",out:"0–100.",interp:"Medida principal de seguimiento.",err:"—",prec:"—"},
 visa_p:{n:"VISA-P",a:"prom",h:"CUE",u:"/100",hb:true,obj:"Severidad de tendinopatía rotuliana.",how:"8 ítems.",out:"0–100.",interp:"Medida principal de seguimiento.",err:"—",prec:"—"},
@@ -1327,7 +1331,8 @@ pain:{nint:"Durante el deporte y a las 24 h",inst:"“De 0 a 10, ¿cuánto dolor
 squeeze5:{nint:"1 intento de 5 s",inst:"“Aprieta mi puño entre las rodillas con toda tu fuerza durante 5 segundos. ¿Cuánto dolor sentiste de 0 a 10?”"},
 decline_nrs:{nint:"1 sentadilla por pierna",inst:"“Baja en una pierna sobre la tabla inclinada. ¿Cuánto dolor sentiste de 0 a 10?”"},
 hop_nrs:{nint:"10 saltos por pierna",inst:"“Salta 10 veces en un pie. ¿Cuánto dolor sentiste de 0 a 10?”"},
-plank:{nint:"1 intento",inst:"“Codos bajo los hombros y el cuerpo recto. Mantén todo lo que puedas sin que se hunda la cadera.”"}
+plank:{nint:"1 intento",inst:"“Codos bajo los hombros y el cuerpo recto. Mantén todo lo que puedas sin que se hunda la cadera.”"},
+knee_rom:{nint:"2 mediciones por lado",inst:"“Acostado de espalda, dobla la rodilla todo lo que puedas; ahora estírala al máximo.”"}
 };
 Object.entries(TX).forEach(([k,o])=>{if(T[k])Object.assign(T[k],o)});
 Object.keys(T).forEach(k=>{if(T[k].h==="CUE"&&!T[k].nint){T[k].nint="1 aplicación";T[k].inst=T[k].inst||"Pedirle que responda pensando en la última semana, sin ayuda."}});
@@ -1493,9 +1498,13 @@ const GEN=[
 {id:"z_tobillo",zona:true,g:"gen",les:[],n:"Tobillo",s:"Movilidad, fuerza, reactividad y control del tobillo y pie",ic:"pulso",
  intro:"Evaluación completa del tobillo sin una lesión específica: dorsiflexión, fuerza de flexores plantares y eversores, capacidad reactiva, saltos unipodales y equilibrio. Útil como línea base, control preventivo o ante molestias inespecíficas.",
  t:["ankle_df","heel_raise","pf_iso","ev_iso","balance","ybal_lq","side_hop","hop_single","cmj_uni","dj_uni","rsi105","cait","pain"]},
-{id:"z_rodilla",zona:true,g:"gen",les:[],n:"Rodilla",s:"Fuerza de cuádriceps e isquios, saltos y control de rodilla",ic:"pulso",
- intro:"Evaluación de rodilla sin una lesión específica: fuerza isométrica, saltos bilaterales y unipodales, alineación al aterrizar y percepción de función. Sirve como línea base y para comparar en el tiempo.",
- t:["q_iso","h_iso","cmj","sj","cmj_uni","dj_rsi","hop_single","hop_triple","hop_cross","hop_6m","ybal_lq","valgus","koos_sp","pain"]},
+{id:"z_rodilla",zona:true,g:"gen",les:[],n:"Rodilla",s:"Reintegro de rodilla para cualquier lesión: estado clínico, fuerza, saltos, hops y confianza",ic:"pulso",
+ intro:"Batería de rodilla para cualquier lesión (LCA, menisco, colaterales, cartílago o rotuliana) y también como línea base. Orden de toma: cuestionarios → ROM y derrame → fuerza isométrica con célula de carga → CMJ y drop jump unipodal (My Jump Lab) → hop tests → calidad de aterrizaje en video → sprint y 505 en fase final. Unos 60–75 min. Elige los tests según la etapa: (1) sin impacto: cuestionarios, ROM y fuerza; (2) antes de correr y saltar: + CMJ bilateral y unipodal; (3) antes de entrenar con el equipo: + drop jump, hops y aterrizaje; (4) antes de competir: todo, incluido sprint y 505.",
+ t:["ikdc","koos_sp","acl_rsi","iprrs","pain","knee_rom","q_iso","h_iso","cmj","cmj_uni","dj_uni","hop_single","hop_triple","hop_cross","hop_6m","less","valgus","sprint10","t505"],
+ crit:"Criterios orientativos: sin derrame y extensión completa; IKDC ≥ 85; ACL-RSI ≥ 65 (I-PRRS si no es LCA); LSI ≥ 90% en cuádriceps, isquios, CMJ unipodal, drop jump unipodal y los 4 hop tests (ideal 95–100%); aterrizaje sin valgo marcado (LESS < 5). La evidencia viene sobre todo de LCA; en otras lesiones se aplica la misma lógica con criterios adaptados. Los cuestionarios de función y de confianza se asocian al retorno tanto o más que los tests físicos aislados.",
+ interp:["El LSI puede sobrestimar la función si la pierna sana también perdió fuerza: registra siempre valores absolutos (N·m/kg, cm) y compara con la línea base previa a la lesión cuando exista.","La fuerza de cuádriceps es el déficit que más se esconde: un LSI de salto de 90% puede convivir con un LSI de fuerza bajo 70%.","Los saltos verticales unipodales y el drop jump suelen mostrar más déficit que los hops horizontales por distancia: incluye ambos.","En el informe, informa cuántos criterios cumple (ej. 6 de 8) en vez de un apto/no apto por un solo test."],
+ prec:["No avanzar a impacto con derrame o pérdida de extensión.","Hops y drop jump sólo con autorización para impacto unilateral.","Sprint y 505 sólo en la fase final.","Ningún test aislado define el alta."],
+ refs:[["Grindem et al. 2016, BJSM (Delaware-Oslo)","https://pmc.ncbi.nlm.nih.gov/articles/PMC4912389"],["Gokeler et al. 2017, KSSTA","https://pubmed.ncbi.nlm.nih.gov/27423208/"],["Webster & Feller 2020, OJSM","https://pmc.ncbi.nlm.nih.gov/articles/PMC7750778"],["Return to sport testing after ACL, IJSPT 2021","https://pmc.ncbi.nlm.nih.gov/articles/PMC8329322"]]},
 {id:"z_cadera",zona:true,g:"gen",les:[],n:"Cadera",s:"Movilidad y fuerza de cadera y aductores",ic:"pulso",
  intro:"Evaluación de cadera sin una lesión específica: rangos de flexión y rotación interna, fuerza de aductores y abductores, control lateral y salto. Incluye el squeeze test y la percepción de función.",
  t:["hip_ir","hip_flex","slr","add_iso","abd_iso","squeeze5","side_bridge","ybal_lq","cmj","hagos","pain"]},
@@ -2393,7 +2402,7 @@ function vAllEvals(){
   </section>`}
 /* Gráfico de torta: abreviatura dentro de cada porción; nombre, % y n.º en la leyenda */
 const DCOL=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
-const ABBR={cmj:"CMJ",cmj_arms:"CMJb",sj:"SJ",dj_rsi:"DJ",cmj_uni:"CMJu",dj_uni:"DJu",rsimod:"RSIm",rsi105:"RSI",fv_jump:"FV",hjump:"SH",ankle_df:"DF",plank:"PF",side_bridge:"PL",sorensen:"BS",mcgill_flex:"FT",q_iso:"CUA",h_iso:"ISQ",add_iso:"ADD",abd_iso:"ABD",pf_iso:"FPL",ev_iso:"EV",hip_ir:"RIC",hip_flex:"FC",slr:"EPR",hop_single:"SHop",hop_triple:"THop",hop_cross:"CHop",hop_6m:"6mH",side_hop:"LHop",slbridge:"PU",heel_raise:"ET",ybal_lq:"YBT",uqybt:"YBTs",grip:"PM",pushup:"FLX",ckcuest:"CKC",sasp:"SASP",sprint10:"S10",sprint30:"S30",t505:"505",illinois:"ILL",smas:"SMAS",nordic_ba:"NOR",nordic_tq:"NORt",vbt_mcv:"VBT",pain:"DOL",er0:"RE0",ir0:"RI0",er90:"RE90",ir90:"RI90",scap:"ESC",rom_er:"ROMe",rom_ir:"ROMi",sh_flex:"FH",wellness:"WEL",valgus:"VAL",balance:"EQ"};
+const ABBR={cmj:"CMJ",cmj_arms:"CMJb",sj:"SJ",dj_rsi:"DJ",cmj_uni:"CMJu",dj_uni:"DJu",rsimod:"RSIm",rsi105:"RSI",fv_jump:"FV",hjump:"SH",ankle_df:"DF",plank:"PF",side_bridge:"PL",sorensen:"BS",mcgill_flex:"FT",q_iso:"CUA",h_iso:"ISQ",add_iso:"ADD",abd_iso:"ABD",pf_iso:"FPL",ev_iso:"EV",hip_ir:"RIC",hip_flex:"FC",slr:"EPR",hop_single:"SHop",hop_triple:"THop",hop_cross:"CHop",hop_6m:"6mH",side_hop:"LHop",slbridge:"PU",heel_raise:"ET",ybal_lq:"YBT",uqybt:"YBTs",grip:"PM",pushup:"FLX",ckcuest:"CKC",sasp:"SASP",sprint10:"S10",sprint30:"S30",t505:"505",illinois:"ILL",smas:"SMAS",nordic_ba:"NOR",nordic_tq:"NORt",vbt_mcv:"VBT",pain:"DOL",er0:"RE0",ir0:"RI0",er90:"RE90",ir90:"RI90",scap:"ESC",rom_er:"ROMe",rom_ir:"ROMi",sh_flex:"FH",wellness:"WEL",valgus:"VAL",balance:"EQ",knee_rom:"ROMr",iprrs:"PRRS"};
 const abbrOf=(tid,name)=>ABBR[tid]||(String(name||"").trim().split(/\s+/).length===1?String(name).slice(0,3).toUpperCase():"")||String(name||"?").split(/[\s\-·]+/).filter(w=>w.length>2||/^\d/.test(w)).map(w=>w[0].toUpperCase()).join("").slice(0,4)||"?";
 function donut(items){const tot=items.reduce((a,x)=>a+x.v,0);if(!tot)return"";
   const R=96,C=100;let a0=-Math.PI/2;const live=items.filter(x=>x.v);
